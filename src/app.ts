@@ -1,4 +1,4 @@
-/// <reference path="../app.d.ts" />
+/// <reference path="../index.d.ts" />
 
 import 'dotenv/config'
 import express from 'express';
@@ -24,4 +24,5 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/v1/donaciones', donacionesRouter);
 app.use(errorHandler);
+
 export { app }

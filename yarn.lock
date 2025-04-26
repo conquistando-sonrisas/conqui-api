@@ -126,6 +126,13 @@
   dependencies:
     undici-types "~6.21.0"
 
+"@types/node@^22.15.2":
+  version "22.15.2"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-22.15.2.tgz#1db55aa64618ee93a58c8912f74beefe44aca905"
+  integrity sha512-uKXqKN9beGoMdBfcaTY1ecwz6ctxuJAcUlwE55938g0ZJ8lRxwAZqRz2AJ4pzpt5dHdTPMB863UZ0ESiFUcP7A==
+  dependencies:
+    undici-types "~6.21.0"
+
 "@types/qs@*":
   version "6.9.18"
   resolved "https://registry.yarnpkg.com/@types/qs/-/qs-6.9.18.tgz#877292caa91f7c1b213032b34626505b746624c2"
@@ -697,10 +704,10 @@ media-typer@^1.1.0:
   resolved "https://registry.yarnpkg.com/media-typer/-/media-typer-1.1.0.tgz#6ab74b8f2d3320f2064b2a87a38e7931ff3a5561"
   integrity sha512-aisnrDP4GNe06UcKFnV5bfMNPBUw4jsLGaWwWfnH3v02GnBuXX2MCVn5RbrWo0j3pczUilYblq7fQ7Nw2t5XKw==
 
-mercadopago@^2.3.0:
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/mercadopago/-/mercadopago-2.4.0.tgz#27db649d57d818c05b2cb074c1cf5a2e0608c720"
-  integrity sha512-t5eB1mk+wEoO6g70Do4I8NeEU7nirpMVEyoZpv28UHvRUoHCQH1f9esZ1J/e2qN74IEejrhbnweUV3LomUsW6A==
+mercadopago@2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/mercadopago/-/mercadopago-2.5.0.tgz#a5b4a9c3e1ef8379b3c14c913b89137470bcb1f2"
+  integrity sha512-f0noLZOoSvTfB+efC7bDZtpht23nEPhWU+UIyd2wojJWzxSiobFgIfCg+3J/zOIV1kZQa2WZ2B+AHxJfZ6pjGA==
   dependencies:
     node-fetch "^2.7.0"
     uuid "^9.0.0"

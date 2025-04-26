@@ -1,29 +1,35 @@
 import { Request, Response, NextFunction } from "express";
 import { matchedData } from "express-validator";
 import { CreateDonacionRequest } from "../middlewares/validators/donacion";
-import { payment } from "../config/mercadoPago";
+import { processDonacionRecurrente, processDonacionUnica, roundToTwo } from "../services/donaciones";
 
 
 export async function processDonacion(req: Request<{}, {}, CreateDonacionRequest>, res: Response, next: NextFunction) {
   const matched = matchedData(req) as CreateDonacionRequest;
+  const transactionAmount = roundToTwo(matched.transaction_amount);
 
-  const description = `Donación ${matched.frequency === 'monthly' ? 'recurrente (mensual)' : 'única'} a Conquistando Sonrisas A.C.`;
-  const transactionAmount = Math.round((matched.transaction_amount + Number.EPSILON) * 100) / 100;
+  switch (matched.frequency) {
+    case 'monthly':
+      const suscriptionId = await processDonacionRecurrente({
+        amount: transactionAmount,
+        email: matched.payer.email,
+        token: matched.token,
+      });
+      res.status(200).json({ suscriptionId });
+      break;
 
-  const mercadoPagoRes = await payment.create({
-    body: {
-      transaction_amount: transactionAmount,
-      token: matched.token,
-      description,
-      installments: 1,
-      payment_method_id: matched.payment_method_id,
-      issuer_id: matched.issuer_id,
-      payer: {
-        email: matched.payer.email
-      },
-    }
-  });
+    case "one-time":
+      const payment = await processDonacionUnica({
+        amount: transactionAmount,
+        token: matched.token,
+        email: matched.payer.email,
+        issuer_id: matched.issuer_id,
+        payment_method_id: matched.payment_method_id
+      });
 
-  res.status(200).json({ paymentId: mercadoPagoRes.id })
+      res.status(200).json(payment)
+      break;
+  }
+
   return;
 }

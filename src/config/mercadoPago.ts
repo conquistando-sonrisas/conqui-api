@@ -1,11 +1,15 @@
-import MercadoPagoConfig, { Payment } from "mercadopago";
+import MercadoPagoConfig from "mercadopago";
 
-const client = new MercadoPagoConfig({
-  accessToken: process.env.MERCADO_PAGO_ACCESS_TOKEN,
+export const checkoutApiClient = new MercadoPagoConfig({
+  accessToken: process.env.DONACIONES_UNICAS_ACCESS_TOKEN,
   options: {
     timeout: 5000
   }
 })
 
-
-export const payment = new Payment(client);
+export const suscriptionsApiClient = new MercadoPagoConfig({
+  accessToken: process.env.DONACIONES_RECURRENTES_ACCESS_TOKEN,
+  options: {
+    timeout: 5000
+  }
+})
