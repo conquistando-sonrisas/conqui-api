@@ -42,7 +42,7 @@ type DonacionRecurrenteArgs = { amount: number, email: string, token: string }
 export const processDonacionRecurrente = async (args: DonacionRecurrenteArgs) => {
   const res = await preaproval.create({
     body: {
-      preapproval_plan_id: process.env.PREAPPROVAL_PLAN_ID,
+      preapproval_plan_id: process.env.DONACIONES_RECURRENTES_PREAPPROVAL_PLAN_ID,
       card_token_id: args.token,
       payer_email: args.email,
       status: 'authorized',
@@ -54,6 +54,7 @@ export const processDonacionRecurrente = async (args: DonacionRecurrenteArgs) =>
       },
     }
   })
+  
   return res.id;
 }
 
