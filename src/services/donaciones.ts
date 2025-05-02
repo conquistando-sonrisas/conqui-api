@@ -45,7 +45,6 @@ export const processDonacionRecurrente = async (args: DonacionRecurrenteArgs) =>
       preapproval_plan_id: process.env.DONACIONES_RECURRENTES_PREAPPROVAL_PLAN_ID,
       card_token_id: args.token,
       payer_email: args.email,
-      status: 'authorized',
       auto_recurring: {
         frequency: 1,
         frequency_type: 'months',
@@ -54,8 +53,14 @@ export const processDonacionRecurrente = async (args: DonacionRecurrenteArgs) =>
       },
     }
   })
-  
-  return res.id;
+
+  return {
+    suscriptionId: res.id,
+    status: res.status,
+    reason: res.reason,
+    amount: res.auto_recurring?.transaction_amount,
+    nextPayment: res.next_payment_date,
+  };
 }
 
 

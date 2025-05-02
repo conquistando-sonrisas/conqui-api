@@ -10,12 +10,12 @@ export async function processDonacion(req: Request<{}, {}, CreateDonacionRequest
 
   switch (matched.frequency) {
     case 'monthly':
-      const suscriptionId = await processDonacionRecurrente({
+      const suscription = await processDonacionRecurrente({
         amount: transactionAmount,
         email: matched.payer.email,
         token: matched.token,
       });
-      res.status(200).json({ suscriptionId });
+      res.status(200).json(suscription);
       break;
 
     case "one-time":
