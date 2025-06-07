@@ -8,27 +8,15 @@ const logger = createLogger({
     errors({ stack: true }),
     timestamp(),
     json(),
-  ),
-  transports: [
-    new transports.File({
-      filename: 'error.log',
-      level: 'error'
-    }),
-    new transports.File({
-      filename: 'combined.log',
-      level: 'info'
-    })
-  ]
+  )
 })
 
-if (process.env.NODE_ENV !== 'production') {
-  logger.add(new transports.Console({
-    format: combine(
-      errors({ stack: true }),
-      timestamp(),
-      json(),
-    )
-  }))
-}
+logger.add(new transports.Console({
+  format: combine(
+    errors({ stack: true }),
+    timestamp(),
+    json(),
+  )
+}))
 
 export default logger;
