@@ -12,11 +12,7 @@ import errorHandler from './middlewares/errorHandler';
 
 const app = express();
 
-app.use(morgan('combined', {
-  stream: {
-    write: message => logger.http(message.trim())
-  }
-}));
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
 app.use(cors())
 app.use(helmet());
 app.use(express.json());
