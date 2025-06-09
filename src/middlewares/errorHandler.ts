@@ -7,5 +7,5 @@ export default function errorHandler(err: Error, req: Request, res: Response, ne
     return next(err);
   }
   logger.error(err);
-  res.status(500).json({ message: err.message });
+  res.sendStatus(500)
 }

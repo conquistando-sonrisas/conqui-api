@@ -6,13 +6,14 @@ import helmet from 'helmet'
 import cors from 'cors';
 import donacionesRouter from './routes/donacionesRoutes';
 import morgan from 'morgan';
-import logger from './config/logger';
 import errorHandler from './middlewares/errorHandler';
+import limiter from './config/rateLimiter';
 
 
 const app = express();
 
-app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
+app.use(limiter)
+app.use(morgan('combined'));
 app.use(cors())
 app.use(helmet());
 app.use(express.json());
