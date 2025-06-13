@@ -12,7 +12,7 @@ import limiter from './config/rateLimiter';
 
 const app = express();
 
-app.set('trust proxy', true)
+app.set('trust proxy', 1)
 
 app.use(limiter)
 app.use(morgan('combined'));
